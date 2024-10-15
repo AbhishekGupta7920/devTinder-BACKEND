@@ -10,7 +10,11 @@ const User = require("./models/user");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-app.use(cors());
+app.use(cors({
+    origin : "http://localhost:5173",
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    credentials : true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

@@ -30,7 +30,8 @@ authRouter.post("/signup", async (req, res)=>{
     
         // await newUser.save();
         const savedUser = await newUser.save();
-        const token = await savedUser.getJWT();
+        const token = await savedUser.getJWT();   // this is new i.e singup karne ke time v token creage karna and 
+        // cookie set karna
 
         res.cookie("token", token, {
             expires : new Date(Date.now() + 8*3600000),

@@ -28,12 +28,18 @@ authRouter.post("/signup", async (req, res)=>{
             firstName, lastName, emailId, password : passwordHash
         });
     
-        await newUser.save();
-        res.json(
-            {massage: "user created successfully",  data : newUser  }
+        // await newUser.save();
+        const savedUser = await newUser.save();
+        const token = await savedUser.getJWT();
+
+        res.cookie("token", token, {
+            expires : new Date(Date.now() + 8*3600000),
+        })
+
+        res.json({massage: "user created successfully",  data : newUser  }
         )
     }catch(err){
-        res.status(400).send("ERROR: " + err);
+        res.status(400).send("ERROR: " + err.massage);
     }
 })
 

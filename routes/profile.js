@@ -20,7 +20,7 @@ profileRoute.get("/profile/view", async (req, res)=>{
 
         res.send(user);
     }catch(err){
-        res.status(401).send("ERROR: " + err);
+        res.status(400).send("ERROR: " + err);
     }
 })
 
